@@ -1,0 +1,23 @@
+#main_head{
+    background: cornflowerblue;
+}
+
+.span{
+    width: 30px;
+    height: 30px;
+}
+
+#table_head{
+    border-bottom: solid 2px cornflowerblue;
+}
+
+#table_div{
+    border: solid 1px #cccccc;
+    border-top: solid 2px cornflowerblue ;
+    padding-top: 10px;
+}
+
+#table_div div{
+    margin-bottom: 5px;
+
+}

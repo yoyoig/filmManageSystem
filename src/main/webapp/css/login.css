@@ -1,0 +1,9 @@
+#loginDiv{
+    border: solid 1px gainsboro;
+    opacity: 1;
+    background: white;
+}
+
+.help-block{
+    color: red;
+}
