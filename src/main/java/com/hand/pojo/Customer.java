@@ -1,5 +1,7 @@
 package com.hand.pojo;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class Customer {
@@ -7,10 +9,13 @@ public class Customer {
 
     private Byte storeId;
 
+    @Pattern(regexp = "^[a-z0-9]{3,16}$",message = "用户名必须3-16位数字或字母")
     private String firstName;
 
+    @Pattern(regexp = "^[a-z0-9]{3,16}$",message = "用户名必须3-16位数字或字母")
     private String lastName;
 
+    @Pattern(regexp = "^(([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6}))!$",message = "请输入正确的邮箱格式")
     private String email;
 
     private Short addressId;

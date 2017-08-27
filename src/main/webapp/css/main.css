@@ -1,23 +1,34 @@
 #main_head{
-    background: cornflowerblue;
+    background: #3ec2ed;
 }
 
 .span{
     width: 30px;
     height: 30px;
+    margin-top: 5px!important;
 }
 
 #table_head{
-    border-bottom: solid 2px cornflowerblue;
+    border-bottom: solid 2px #3ec2ed !important;
 }
 
 #table_div{
     border: solid 1px #cccccc;
-    border-top: solid 2px cornflowerblue ;
+    border-top: solid 2px #3ec2ed;
     padding-top: 10px;
 }
 
 #table_div div{
     margin-bottom: 5px;
 
+}
+
+
+#customer_list_title{
+    border-bottom: solid 1px gainsboro;
+    margin-bottom: 10px;
+}
+
+#customer_list_title span{
+    font-size: 24px;
 }

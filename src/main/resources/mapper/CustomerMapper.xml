@@ -73,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List" >
     customer_id, store_id, first_name, last_name, email, address_id, active, create_date, 
-    last_update, password
+    last_update
   </sql>
 
   <resultMap id="BaseResultMapWithAddress" type="com.hand.pojo.Customer" >

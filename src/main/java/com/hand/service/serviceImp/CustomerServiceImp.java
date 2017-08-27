@@ -41,7 +41,31 @@ public class CustomerServiceImp implements CustomerService {
         PageHelper.startPage(pageName,10);
         List<Customer> list = mapper.selectByExampleWithAddress(null);
         PageInfo<Customer> pageInfo = new PageInfo<Customer>(list,5);
-        return pageInfo;
+        //当pageName大于总页数时，默认到最后一页
+        if(pageName>pageInfo.getPages()){
+            pageName=pageInfo.getPages();
+            PageHelper.startPage(pageName,10);
+            List<Customer> list2 = mapper.selectByExampleWithAddress(null);
+            PageInfo<Customer> pageInfo2 = new PageInfo<Customer>(list2,5);
+            return pageInfo2;
+        }else {
+            return pageInfo;
+        }
+    }
+
+    @Override
+    public int addCustomer(Customer customer) {
+        return mapper.insertSelective(customer);
+    }
+
+    @Override
+    public Customer getCustomerById(short id) {
+        return mapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int editCustomerById(Customer customer) {
+        return mapper.updateByPrimaryKeySelective(customer);
     }
 
 

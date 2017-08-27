@@ -1,0 +1,21 @@
+#add_customer_div{
+    border-top: solid 2px #3ec2ed;
+    margin-top: 5px;
+    border-bottom: solid 1px gainsboro;
+    border-left: solid 1px gainsboro;
+    border-right: solid 1px gainsboro;
+}
+
+#add_customer_div_head{
+    border-bottom: solid 1px gainsboro;
+
+}
+#add_customer_div_head span{
+    font-size: 24px;
+
+}
+
+#add_div_title{
+    border-bottom: solid 1px gainsboro;
+    margin-bottom: 8px;
+}

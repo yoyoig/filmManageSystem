@@ -15,8 +15,16 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
 
-    <mvc:annotation-driven ></mvc:annotation-driven>
-
+    <mvc:annotation-driven >
+        <!--json日期转换-->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                <property name="objectMapper" ref="customObjectMapper"></property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!--json日期转换-->
+    <bean id="customObjectMapper" class="com.hand.utils.CustomObjectMapper"></bean>
     <!--validator="validator"-->
 
     <!--在spring容器中加载handler ，对指定包进行扫描 -->

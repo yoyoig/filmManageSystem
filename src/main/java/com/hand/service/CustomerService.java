@@ -11,4 +11,10 @@ public interface CustomerService {
     Customer CustomerLogin(String firstName);
 
     PageInfo<Customer> getCustomerByPage(int pageName);
+
+    int addCustomer(Customer customer);
+
+    Customer getCustomerById(short id);
+
+    int editCustomerById(Customer customer);
 }
