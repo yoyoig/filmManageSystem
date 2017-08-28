@@ -2,8 +2,16 @@
     border: solid 1px gainsboro;
     opacity: 1;
     background: white;
+    margin-top:50px;
+    padding:0px;
 }
 
 .help-block{
     color: red;
+}
+
+#title{
+    border-bottom: solid 1px gainsboro;
+    margin-bottom:20px;
+    padding-left:30px
 }

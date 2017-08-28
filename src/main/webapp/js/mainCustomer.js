@@ -1,9 +1,43 @@
 $(document).ready(function () {
-    //获取当前项目路径
-    var $url = $("#url").val();
+    /**
+     * 获取当前rul，并取出空格
+     * @type {*}
+     */
+    var $url = $.trim($("#url").val());
 
-// ---------------------handlebar的自定义helper
-    //得到上一页的页码
+    /**
+     * 全局变量，存放查询条件
+     */
+    var $eaxmple;
+
+    $("#select_customer_btn").click(function () {
+        $eaxmple = $("#customer_example").serialize();
+        toPage(1);
+    })
+
+    insertAddressExample($("#select_example"))
+
+    function insertAddressExample(position) {
+
+        $.ajax({
+            url:$url+"address",
+            type:"GET",
+            success:function (result) {
+                if (result.code==100){
+                    console.log(result)
+                    renderTemplate(result.map.addressList,$("#address_add_customer_example-template"),position)
+                }
+            }
+        })
+    }
+
+    /**
+     * ---------------------handlebar的自定义helper
+      */
+
+    /**
+     * 返回上一页页码
+     */
     Handlebars.registerHelper("pre",function (value) {
         if(value>1){
             return value-1;
@@ -12,7 +46,9 @@ $(document).ready(function () {
         }
     })
 
-    //得到下一页的页码
+    /**
+     * 返回下一页页码
+     */
     Handlebars.registerHelper("next",function (value,value2) {
         if (value<value2) {
             return value + 1;
@@ -21,7 +57,10 @@ $(document).ready(function () {
         }
     })
 
-    //判断该页码是否为当前页码，是则active状态
+
+    /**
+     * 判断该页码是否为当前页码，是则为选中状态
+     */
     Handlebars.registerHelper("active",function(curPage,page,options){
         if (curPage==page){
             return options.fn(this);
@@ -29,28 +68,38 @@ $(document).ready(function () {
 
     })
 
-    //当address 的 id相等时，默认该option被选择
+
+    /**
+     * 判断customer的address是否匹配，匹配则当前addres为选中状态
+     */
     Handlebars.registerHelper("addrSlt",function (caId,adId,options) {
         if (caId==adId){
             return options.fn(this)
         }
     })
 
-// ----------------------------------------
-
-
-    //默认进入首页
-    $.ajax({
-        url:$url+"customer",
-        type:"GET",
-        data:{"pageName":1},
-        success:function (result) {
-            renderTemplate(result.map.pageInfo.list,$("#customer-template"),$("#customer_list"))
-            renderTemplate(result.map.pageInfo,$("#pageCode-template"),$("#page-list"));
+    Handlebars.registerHelper("isFilm",function (value,options) {
+        if (value=="filmPage"){
+            options.inverse()
+        }else {
+            options.fn(this)
         }
     })
 
-    //将数据注入到模板中，并将模板展示到指定的容器
+// ----------------------------------------
+
+
+    /**
+     * 访问时默认进入首页
+     */
+    toPage(1);
+
+    /**
+     * 将数据填充到制定模板，并将模板放入指定位置
+     * @param result  数据
+     * @param content 模板
+     * @param position 坐标
+     */
     function  renderTemplate(result,content,position) {
         var t = content.html();
         var f = Handlebars.compile(t);
@@ -59,22 +108,45 @@ $(document).ready(function () {
         position.html(h);
     }
 
-    //指定到某页
+    /**
+     * 进入到指定的页码页面
+     * @param num 页码
+     */
     function toPage(num) {
         $.ajax({
-            url:$url+"customer",
-            data:{"pageName":num},
+            // url:$url+"customer",
+            // data:{"pageName":num},
+
+            //根据条件查询
+            url:$url+"customerByExam/"+num,
+            data:$eaxmple,
+
             type:"GET",
             success:function (result) {
+                if(result == "unlogin"){
+                    window.location.href=$url+"index.jsp";
+                }
+
                 renderTemplate(result.map.pageInfo.list,$("#customer-template"),$("#customer_list"));
                 renderTemplate(result.map.pageInfo,$("#pageCode-template"),$("#page-list"));
-                //进行页面判断，若当前页为首页则首页和上一页失效，减少无用的请求和操作
 
+                if(result.map.pageInfo.hasPreviousPage==false){
+                    $("[class='pre page']").parent().addClass("disabled");
+                    $("[class='first page']").parent().addClass("disabled");
+                }else if(result.map.pageInfo.hasNextPage==false){
+                    $("[class='next page']").parent().addClass("disabled");
+                    $("[class='end page']").parent().addClass("disabled");
+                }
             }
         })
     }
 
-    // 给页码添加点击事件
+
+
+
+    /**
+     * 给页码添加跳转页面的事件
+     */
     $(document).on("click",".page",function () {
         //获取当前组件中的page属性
         var $page = $(this).attr("page");
@@ -85,7 +157,10 @@ $(document).ready(function () {
 
     //*******************************************新增功能js*******************************************
 
-    //用于清楚表单的状态信息和表单中的信息
+    /**
+     * 清楚表单中的数据
+     * @param ele 表单对象
+     */
     function reset_form(ele) {
         $(ele)[0].reset();
         $(ele).find("*").removeClass("has-success has-error");
@@ -93,7 +168,9 @@ $(document).ready(function () {
 
     }
 
-    //新增按钮点击进入新增页面
+    /**
+     * 给添加按钮绑定事件，显示添加customer页面
+     */
     $("#add_customer_btn").click(function () {
         $("#customer_list_div").css("display","none");
         $("#customer_add_div").css("display","block");
@@ -104,7 +181,11 @@ $(document).ready(function () {
         insertAddress($("#address_select"),null);
     })
 
-    //将查询的地址放入到指定的位置中，
+    /**
+     * 将数据库中的address取出，放入到指定的select标签中
+     * @param position   坐标
+     * @param languageId 当前默认的address
+     */
     function insertAddress(position,addrId) {
 
         $.ajax({
@@ -120,19 +201,28 @@ $(document).ready(function () {
     }
 
 
-    //取消新增按钮返回主页面
+    /**
+     *点击退出添加customer页面
+     */
     $("#cancel_add_btn").click(function () {
         $("#customer_add_div").css("display","none");
         $("#customer_list_div").css("display","block");
     })
-    //用于清楚验证状态
+
+
+    /**
+     * 清楚校验状态
+     * @param parent 表单组件
+     * @param next   提示组件
+     */
     function cleanStatus(parent,next) {
         parent.removeClass("has-success has-error");
         next.html("");
     }
 
-    //新增数据前端校验
-    //firstName 和 lastName 不能为空
+    /**
+     * 对first_name进行格式校验，格式通过后再进行重复校验
+     */
     $("#first_name").blur(function () {
         var $this = $(this)
         var $firstName = $.trim($(this).val());
@@ -141,14 +231,13 @@ $(document).ready(function () {
         //获取当前元素的下一个兄弟节点
         var $next = $(this).next();
 
-        var reg = /^[a-z0-9]{3,16}$/;
+        var reg = /[A-Za-z0-9]{3,16}$/;
         if(reg.test($firstName)){
 
             //对firstName进行重复校验
             $.ajax({
-                url:$url+"customerLogin",
-                type:"POST",
-                data:{"firstName":$firstName},
+                url:$url+"customerExist/"+$firstName,
+                type:"GET",
                 success:function (result) {
                     if (result.code==100){
                         cleanStatus($parent,$next)
@@ -169,16 +258,13 @@ $(document).ready(function () {
             $parent.addClass("has-error");
             $next.html("用户名必须3-16位数字或字母");
             $this.attr("add_validate","error");
-
-
-
-
         }
 
     })
 
-    //该验证和编辑共用
-
+    /**
+     * 对last_name进行格式校验，该校验和编辑共用
+     */
     $(document).on("blur",".customer_last_name",function () {
         var $this = $(this)
         var $lastName = $.trim($(this).val());
@@ -186,7 +272,7 @@ $(document).ready(function () {
         var $parent = $(this).parent();
         //获取当前元素的下一个兄弟节点
         var $next = $(this).next();
-        var reg = /^[a-z0-9]{3,16}$/;
+        var reg = /[A-Za-z0-9]{3,16}$/;
         if(reg.test($lastName)){
             cleanStatus($parent,$next)
             $parent.addClass("has-success");
@@ -200,8 +286,9 @@ $(document).ready(function () {
     })
 
 
-    //可以为空，但不为空时格式不能错误
-    //该验证和编辑共用
+    /**
+     * 对email进行格式校验，该校验和编辑共用
+     */
     $(document).on("blur",".customer_email",function () {
         var $this = $(this)
         var $email = $.trim($(this).val());
@@ -210,7 +297,7 @@ $(document).ready(function () {
         //获取当前元素的下一个兄弟节点
         var $next = $(this).next();
         if ($email!=null && $email!=""){
-            var rep = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+            var rep = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
             if(rep.test($email)){
                 cleanStatus($parent,$next)
                 $parent.addClass("has-success");
@@ -229,7 +316,10 @@ $(document).ready(function () {
 
 
 
-    //添加按钮，点击请求后台添加该数据，并返回到最后一页
+    /**
+     * 确认添加customer按钮，首先检查字段校验是否通过，
+     * 若通过则添加成功，并返回到最后一页
+     */
     $("#add_customer_submit_btn").click(function () {
         var $firstName = $("#first_name").attr("add_validate")
         var $lastName = $("#last_name").attr("add_validate")
@@ -262,7 +352,9 @@ $(document).ready(function () {
     //***************************编辑customer*******************************************
 
 
-    //给编辑按钮添加事件，通过id返回编辑区用户信息
+    /**
+     * 点击显示编辑页面，并将customer展示到页面
+     */
     $(document).on("click",".edit",function () {
         var $customerId = $(this).attr("customerId")
         $.ajax({
@@ -286,6 +378,10 @@ $(document).ready(function () {
         $('#eidt_Customer_Modal').modal("show")
     })
 
+    /**
+     * 点击进行修改操作，先进行字段校验，校验通过后，
+     * 向后端请求修改信息
+     */
     $(document).on("click","#edit_save_btn",function () {
         var $lastName = $("#edit_last_name").attr("add_validate")
         var $email = $("#edit_InputEmail").attr("add_validate")
@@ -299,7 +395,7 @@ $(document).ready(function () {
                 success:function (result) {
 
                     if (result.code==100){
-                        $("#editEmpModal").modal("hide");
+                        $("#eidt_Customer_Modal").modal("hide");
                         toPage($("#save_cur_page").attr("curPage"));
 
                     }else{
@@ -330,6 +426,138 @@ $(document).ready(function () {
        }else{
            return false
        }
+    })
+
+    /**
+     * *************************删除*******************************************
+     */
+
+    /**
+     * 删除单个film
+     */
+    $(document).on("click",".delete",function () {
+        var $customerId = $(this).attr("customerId")
+        var $firstName = $(this).attr("name")
+        var $pageName = $("#save_cur_page").attr("curPage")
+
+        if (confirm("是否删除"+$firstName+"?")) {
+            $.ajax({
+                url: $url + "customer/" + $customerId,
+                type: "DELETE",
+                success: function (result) {
+                    if (result.code == 100) {
+                        alert("删除成功")
+                        toPage($pageName)
+                    } else {
+                        alert("删除失败")
+                    }
+                }
+            })
+        }
+
+    })
+
+    /**
+     * 批量删除时，全选点击后，customer
+     */
+    $("#select_all_customer").click(function () {
+        // alert($(this).prop("checked"))
+        if($(this).prop("checked")){
+            $(".select_one_customer").prop("checked",true);
+        }else{
+            $(".select_one_customer").prop("checked",false);
+        }
+    })
+
+    /**
+     * 批量删除时，customer，全选框为选择状态
+     */
+    $(document).on("change",".select_one_customer",function () {
+        //$(".check:checked") 为选取类为check，且被选取的组件
+        if ($(".select_one_customer:checked").length==10){
+            $("#select_all_customer").prop("checked",true);
+        }else {
+            $("#select_all_customer").prop("checked",false);
+        }
+    })
+
+    /**
+     * 批量删除，customer，拼装id后，请求后台删除
+     */
+    $("#delete_customer_btn").click(function () {
+
+        var $customerId = "";
+        var $firstName = "";
+
+        $(".select_one_customer:checked").each(function () {
+            $customerId+=($(this).attr("customerId")+"-");
+            $firstName+=($(this).attr("firstName")+",");
+        })
+
+        var ids = $customerId.substring(0,$customerId.length-1);
+        var names = $firstName.substring(0,$firstName.length-1);
+
+        if(names==null || names==""){
+            alert("请选择你要删除的customer")
+            return false
+        }
+
+        if (confirm("确定删除["+names+"]?")){
+
+            $.ajax({
+                url:$url+"customer/"+ids,
+                type:"DELETE",
+                success:function (result) {
+
+                    if (result.code ==100) {
+                        alert("成功删除id为"+result.map.ids+"的customer!")
+                        toPage($("#save_cur_page").attr("curPage"));
+                    }else {
+                        alert("删除失败");
+                    }
+                }
+
+
+            })
+        }
+
+
+    })
+
+
+    /**
+     * 主菜单切换到customer
+     */
+    $(document).on("click","#customer_menu",function () {
+        $("#film_list_div").css("display","none");
+        $("#customer_add_div").css("display","none");
+        $("#film_add_div").css("display","none");
+        toPage(1)
+        $("#customer_list_div").css("display","block");
+    })
+
+
+    /**
+     * 用户退出
+     */
+    $("#logout").click(function () {
+
+        if (confirm("是否退出登录？")) {
+
+            $.ajax({
+                url: $url + "customerLogout",
+                type: "GET",
+                success: function (result) {
+                    if (result.code == 100) {
+                        alert("退出成功")
+                        window.location.href=$url+'index.jsp';
+                    }
+                }
+            })
+        }else{
+            return false;
+        }
+
     })
 
 

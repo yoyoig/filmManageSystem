@@ -23,9 +23,10 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
     <!--json日期转换-->
     <bean id="customObjectMapper" class="com.hand.utils.CustomObjectMapper"></bean>
-    <!--validator="validator"-->
+
 
     <!--在spring容器中加载handler ，对指定包进行扫描 -->
     <context:component-scan base-package="com.hand.web"/>
@@ -33,40 +34,19 @@
     <!--2.静态资源默认servlet配置-->
     <mvc:default-servlet-handler/>
 
-    <!-- 配置校验器，若不使用文件声明错误信息可以不许要配置校验器。-->
-    <!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">-->
-        <!--&lt;!&ndash;hibernate校验器 &ndash;&gt;-->
-        <!--<property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>-->
-        <!--&lt;!&ndash;指定校验使用的文件 &ndash;&gt;-->
-        <!--&lt;!&ndash;<property name="validationMessageSource" ref="messageSource"></property>&ndash;&gt;-->
-    <!--</bean>-->
 
-    <!--校验错误信息配置文件-->
-    <!--<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">-->
-        <!--<property name="basenames">-->
-            <!--<list>-->
-                <!--若使用文件来声明错误信息，必须有classpath且无需后缀名！！ -->
-                <!--<value>classpath:filmValidationMessage</value>-->
-            <!--</list>-->
-        <!--</property>-->
-        <!--<property name="fileEncodings" value="utf-8"></property>-->
-        <!--<property name="cacheSeconds" value="120"></property>-->
-    <!--</bean>-->
 
     <!--配置全局拦截器 -->
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash; /** 表时拦截所有url包括子url&ndash;&gt;-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--<bean class="com.hand.interceptor.EncodInterceptor"></bean>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--<mvc:exclude-mapping path="/index.jsp"></mvc:exclude-mapping>-->
-            <!--<mvc:exclude-mapping path="/customer/customerLogin"></mvc:exclude-mapping>-->
-            <!--<bean class="com.hand.interceptor.PowerInterceptor"></bean>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/customer"/>
+            <mvc:mapping path="/customer/*"/>
+            <mvc:mapping path="/main.jsp"/>
+            <mvc:mapping path="/film"/>
+            <mvc:mapping path="/film/*"/>
+            <bean class="com.hand.interceptor.PowerInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 

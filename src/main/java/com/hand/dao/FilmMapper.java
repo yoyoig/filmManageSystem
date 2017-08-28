@@ -20,6 +20,8 @@ public interface FilmMapper {
 
     List<Film> selectByExample(FilmExample example);
 
+    List<Film> selectByExampleWithLanguage(FilmExample example);
+
     Film selectByPrimaryKey(Short filmId);
 
     int updateByExampleSelective(@Param("record") Film record, @Param("example") FilmExample example);

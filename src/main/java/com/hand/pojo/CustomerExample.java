@@ -446,6 +446,11 @@ public class CustomerExample {
         }
 
         public Criteria andAddressIdEqualTo(Short value) {
+            addCriterion("c.address_id =", value, "addressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdLikeTo(Short value) {
             addCriterion("address_id =", value, "addressId");
             return (Criteria) this;
         }

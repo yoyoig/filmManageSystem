@@ -1,0 +1,18 @@
+#film_table_div{
+    border: solid 1px #cccccc;
+    border-top: solid 2px #3ec2ed;
+    padding-top: 10px;
+}
+
+#film_table_div div{
+    margin-bottom: 5px;
+}
+
+#film_list_title{
+    border-bottom: solid 1px gainsboro;
+    margin-bottom: 10px;
+}
+
+#film_list_title span{
+    font-size: 24px;
+}

@@ -83,6 +83,41 @@
   <sql id="Blob_Column_List" >
     description
   </sql>
+
+  <!--关联查询language-->
+  <sql id="Base_Column_List_With_address" >
+    f.film_id, f.title, f.description,f.language_id, l.language_id,l.name
+  </sql>
+  <!--关联查询map-->
+  <resultMap id="BaseResultMapWithLanguage" type="com.hand.pojo.Film" >
+    <id column="film_id" property="filmId" jdbcType="SMALLINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="language_id" property="languageId" jdbcType="TINYINT" />
+    <association property="language" javaType="com.hand.pojo.Language">
+      <id column="language_id" property="languageId" jdbcType="TINYINT" />
+      <result column="name" property="name" jdbcType="CHAR" />
+    </association>
+  </resultMap>
+
+
+  <!--关联查询-->
+  <select id="selectByExampleWithLanguage" resultMap="BaseResultMapWithLanguage" parameterType="com.hand.pojo.FilmExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List_With_address" />
+    from film f LEFT OUTER JOIN LANGUAGE l ON f.language_id=l.language_id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hand.pojo.FilmExample" >
     select
     <if test="distinct" >

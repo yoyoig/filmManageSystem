@@ -1,6 +1,7 @@
 package com.hand.service;
 
 import com.github.pagehelper.PageInfo;
+import com.hand.dto.Msg;
 import com.hand.pojo.Customer;
 
 /**
@@ -17,4 +18,8 @@ public interface CustomerService {
     Customer getCustomerById(short id);
 
     int editCustomerById(Customer customer);
+
+    Msg deleteCustomerById(String customerIds);
+
+    PageInfo<Customer> getCustomerByPageWithExample(Customer customer,int pageName);
 }

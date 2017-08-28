@@ -24,11 +24,9 @@
 
 
         <div id="loginDiv" class="col-md-6 col-lg-offset-3">
-            <div class="col-sm-12">
+            <div id="title">
                 <h3>电影租凭管理系统</h3>
-                <hr>
             </div>
-            <hr>
             <div class="col-sm-12">
                 <form id="loginForm" url="<c:url value="/"/>" class="form-horizontal">
                     <div class="form-group">
@@ -42,7 +40,7 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">密码</label>
                         <div class="col-sm-10">
                             <input type="password" class="form-control" name="password" id="inputEmail3" placeholder="password">
-                            <span class="help-block"></span>
+                            <span class="help-block" style="color: red">${msg}</span>
                         </div>
                     </div>
                     <div class="form-group">

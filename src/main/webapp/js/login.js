@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     //获取当前项目的相对路径
-    var $url = $("#loginForm").attr("url");
+    var $url = $.trim($("#loginForm").attr("url"));
 
     //用户名的前端校验
     $("#inputName").blur(function () {

@@ -32,3 +32,29 @@
 #customer_list_title span{
     font-size: 24px;
 }
+
+.menu_list{
+    height: 40px;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 20px;
+    border-bottom: solid 1px gainsboro
+}
+
+.menu_list>a>div>span{
+    float: right;
+}
+
+.menu_list>a:hover{
+    text-decoration:none;
+}
+.menu_list>a:active{
+    text-decoration:none;
+}
+.menu_list>a:visited{
+    text-decoration:none;
+}
+.menu_list>a:link{
+    text-decoration:none;
+}
+

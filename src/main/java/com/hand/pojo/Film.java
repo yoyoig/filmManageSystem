@@ -1,11 +1,13 @@
 package com.hand.pojo;
 
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class Film {
     private Short filmId;
 
+    @Pattern(regexp = "^[A-Za-z0-9]{3,16}$",message = "电影名必须3-16位数字或字母")
     private String title;
 
     private Date releaseYear;
@@ -28,6 +30,7 @@ public class Film {
 
     private Date lastUpdate;
 
+    @Pattern(regexp = "^[A-Za-z0-9\\s]{5,300}$",message = "描述必须5-300个字母或数字")
     private String description;
 
     private Language language;
@@ -142,5 +145,25 @@ public class Film {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "filmId=" + filmId +
+                ", title='" + title + '\'' +
+                ", releaseYear=" + releaseYear +
+                ", languageId=" + languageId +
+                ", originalLanguageId=" + originalLanguageId +
+                ", rentalDuration=" + rentalDuration +
+                ", rentalRate=" + rentalRate +
+                ", length=" + length +
+                ", replacementCost=" + replacementCost +
+                ", rating='" + rating + '\'' +
+                ", specialFeatures='" + specialFeatures + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                ", description='" + description + '\'' +
+                ", language=" + language +
+                '}';
     }
 }

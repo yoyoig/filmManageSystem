@@ -92,7 +92,7 @@
 
   <!--关联查询sql-->
   <sql id="Base_Column_List_with_address" >
-    c.customer_id, c.first_name, c.last_name, c.email,c.last_update,a.address_id,a.address
+    c.customer_id, c.first_name, c.last_name,c.address_id,c.email,c.last_update,a.address_id,a.address
   </sql>
 
   <!--关联查询地址-->
