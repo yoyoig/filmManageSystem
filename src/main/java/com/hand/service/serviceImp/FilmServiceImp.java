@@ -126,6 +126,16 @@ public class FilmServiceImp implements FilmService {
 
     @Override
     public PageInfo<Film> getFilmByPageWithExample(Film film, int pageName) {
+        short id = film.getLanguageId();
+        String title  = film.getTitle();
+
+        FilmExample example = new FilmExample();
+        if (id == 0){
+
+        }else{
+
+        }
+
         return null;
     }
 }
