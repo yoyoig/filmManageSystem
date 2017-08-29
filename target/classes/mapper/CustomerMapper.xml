@@ -71,6 +71,7 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Base_Column_List" >
     customer_id, store_id, first_name, last_name, email, address_id, active, create_date, 
     last_update
@@ -110,6 +111,15 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <!--删除用户的前提条件之1-->
+  <delete id="deleteCustomerByPreOne" parameterType="int">
+    DELETE FROM payment WHERE customer_id =#{id};
+  </delete>
+  <!--删除用户的前提条件之2-->
+  <delete id="deleteCustomerByPreTwo" parameterType="int">
+    DELETE FROM rental WHERE customer_id =#{id};
+  </delete>
 
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hand.pojo.CustomerExample" >
     select

@@ -117,6 +117,22 @@
     </if>
   </select>
 
+  <delete id="deleteFilmPreOne" parameterType="int">
+    DELETE FROM film_actor WHERE film_id =#{id}
+  </delete>
+  <delete id="deleteFilmPreTwo" parameterType="int">
+    DELETE FROM film_category WHERE film_id =#{id}
+  </delete>
+  <delete id="deleteFilmPreThree" parameterType="int">
+    DELETE FROM film_text WHERE film_id =#{id}
+  </delete>
+  <delete id="deleteFilmPreFour" parameterType="int">
+    DELETE FROM rental WHERE inventory_id IN (SELECT inventory_id FROM inventory WHERE film_id = #{id} )
+  </delete>
+  <delete id="deleteFilmPreFive" parameterType="int">
+    DELETE FROM inventory WHERE film_id =#{id}
+  </delete>
+
 
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hand.pojo.FilmExample" >
     select

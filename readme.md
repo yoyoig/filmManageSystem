@@ -1,7 +1,7 @@
 # 电影租凭系统
  
 * 数据库配置
-<p>在src/main/resources/jdbc.properties中进行配置。</p>
+<p>在<code>src/main/resources/jdbc.properties</code>中进行配置。</p>
 
 * 运行方式
 
@@ -14,7 +14,7 @@
  3. <code>mvn jetty:run</code>  
    
 <p>当命令行出现 <code>[INFO] Started Jetty Server</code> 时。
-在浏览器打开http://localhost:8080/ 即可进入登录页面.
+在浏览器打开http://localhost:8080/filmManageSystem/ 即可进入登录页面.
 </p>
 
 ### 用户登录
