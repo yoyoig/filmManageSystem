@@ -29,4 +29,8 @@ public interface CustomerMapper {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+    int deleteCustomerByPreOne(int id);
+
+    int deleteCustomerByPreTwo(int id);
 }

@@ -10,6 +10,9 @@ import com.hand.pojo.FilmExample;
 import com.hand.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,7 @@ public class FilmServiceImp implements FilmService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS,isolation = Isolation.DEFAULT)
     public Msg deleteFilmById(String filmIds){
 
         if(filmIds.contains("-")){
@@ -74,6 +78,11 @@ public class FilmServiceImp implements FilmService {
 //                进行删除
                 int result = 0;
                 try {
+                    mapper.deleteFilmPreOne(id);
+                    mapper.deleteFilmPreTwo(id);
+                    mapper.deleteFilmPreThree(id);
+                    mapper.deleteFilmPreFour(id);
+                    mapper.deleteFilmPreFive(id);
                     result = mapper.deleteByPrimaryKey(id);
                 } catch (Exception e) {
                     numFail.add(id);
@@ -96,6 +105,11 @@ public class FilmServiceImp implements FilmService {
             short filmId = Short.parseShort(filmIds);
             int result = 0;
             try {
+                mapper.deleteFilmPreOne(filmId);
+                mapper.deleteFilmPreTwo(filmId);
+                mapper.deleteFilmPreThree(filmId);
+                mapper.deleteFilmPreFour(filmId);
+                mapper.deleteFilmPreFive(filmId);
                 result = mapper.deleteByPrimaryKey(filmId);
             } catch (Exception e) {
 
@@ -126,16 +140,6 @@ public class FilmServiceImp implements FilmService {
 
     @Override
     public PageInfo<Film> getFilmByPageWithExample(Film film, int pageName) {
-        short id = film.getLanguageId();
-        String title  = film.getTitle();
-
-        FilmExample example = new FilmExample();
-        if (id == 0){
-
-        }else{
-
-        }
-
         return null;
     }
 }

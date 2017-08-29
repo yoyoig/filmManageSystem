@@ -181,7 +181,7 @@
             <td>{{language.name}}</td>
             <td>
                 <a class="edit_film" filmId="{{filmId}}" href="#">编辑</a>|
-                <a class="delete_film" title="{{title}}" customerId="{{filmId}}"  href="#">删除</a>
+                <a class="delete_film" filmName="{{title}}" customerId="{{filmId}}"  href="#">删除</a>
             </td>
         </tr>
         {{/each}}

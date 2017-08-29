@@ -35,4 +35,14 @@ public interface FilmMapper {
     int updateByPrimaryKeyWithBLOBs(Film record);
 
     int updateByPrimaryKey(Film record);
+
+    int deleteFilmPreOne(int id);
+
+    int deleteFilmPreTwo(int id);
+
+    int deleteFilmPreThree(int id);
+
+    int deleteFilmPreFour(int id);
+
+    int deleteFilmPreFive(int id);
 }

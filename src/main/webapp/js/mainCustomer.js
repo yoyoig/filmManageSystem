@@ -491,7 +491,7 @@ $(document).ready(function () {
 
         $(".select_one_customer:checked").each(function () {
             $customerId+=($(this).attr("customerId")+"-");
-            $firstName+=($(this).attr("firstName")+",");
+            $firstName+=($(this).attr("firstName")+"、");
         })
 
         var ids = $customerId.substring(0,$customerId.length-1);

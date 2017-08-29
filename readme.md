@@ -7,13 +7,13 @@
 
 <p>在项目根目录下 打开命令窗口，分别运行以下命令</p>
  
- 1. 'mvn clean'
-  
- 2. 'mvn compile'
+ 1. <code>mvn clean</code>
  
- 3. 'mvn jetty:run'   
+ 2. <code>mvn compile</code>  
+ 
+ 3. <code>mvn jetty:run</code>  
    
-<p>当命令行出现 [INFO] Started Jetty Server 时。
+<p>当命令行出现 <code>[INFO] Started Jetty Server</code> 时。
 在浏览器打开http://localhost:8080/ 即可进入登录页面.
 </p>
 
@@ -44,6 +44,17 @@
 ## CUSTOMER管理功能
 * 首页默认进入customer管理
 * 点击左边导航栏的customer管理也可进入customer管理
+* 相关url,使用Restful风格url。
+
+1. 分页条件查询：<code>/customerByExam/{pageName}</code> 方式 <code>GET</code> 
+
+1. 单条查询：<code>/customer/{customerId}</code>方式<code>GET</code>
+
+1. 添加：<code>/customer</code> 方式<code>POST</code>
+
+1. 更新：<code>/customer/{customerId}</code> 方式<code>PUT</code>
+
+1. 删除：<code>/customer/{customerIds}</code>方式<code>DELETE</code>
 
 
 ### 查询用户信息
@@ -51,7 +62,7 @@
 <p>查询用户信息使用了多条件查询的方式,第一次进入时默认条件为空,即查询所有。
 当在条件框里输入相关信息,再点击查询即可实现多条件查询,则页面显示条件查询结果,
 若要查询所有,不再使用条件查询,将查询框中的条件删除即可。
-要注意,地址选择为---未选择----时为空。否则会进行条件查询该地址的用户。
+要注意,地址选择为<code>---未选择---</code>时为空。否则会进行条件查询该地址的用户。
 <p>
 
 
@@ -101,14 +112,11 @@
 * 单个删除
 <p>点击每个customer信息操作下的删除链接，即可实现单条删除。
 点击时会提示是否确认删除。当删除成功后会提示删除成功，并返回到当前页面。
-由于表中有大量外键关联，所以原数据删除会失败。
-当删除失败会提示删除失败信息。
-我们只能删除我们新增的customer</p>
+当删除失败会提示删除失败信息。</p>
 
 
 * 批量删除
-<p>同单条删除，我们只能删除我们新增的customer。
-通过多选框选择我们要删除的数据。然后点击新增按钮旁边的删除按钮。
+<p>通过多选框选择我们要删除的数据。然后点击新增按钮旁边的删除按钮。
 提示我们是否删除这些customer，点击取消则退出删除，点击确认则将请求发送到后台进行删除。
 当删除成功会提示成功删除了的数据。否则提示删除失败。</p>
 

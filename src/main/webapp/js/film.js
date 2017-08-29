@@ -371,7 +371,7 @@ $(document).ready(function () {
 
         $(".select_one_film:checked").each(function () {
             $filmId+=($(this).attr("filmId")+"-");
-            $title+=($(this).attr("title")+",");
+            $title+=($(this).attr("filmId")+"、");
         })
 
         var ids = $filmId.substring(0,$filmId.length-1);
@@ -382,7 +382,7 @@ $(document).ready(function () {
             return false
         }
 
-        if (confirm("确定删除["+names+"]?")){
+        if (confirm("确定删除id为["+names+"]的film?")){
 
             $.ajax({
                 url:$url+"film/"+ids,

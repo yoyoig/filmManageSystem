@@ -10,6 +10,9 @@ import com.hand.pojo.CustomerExample;
 import com.hand.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +75,7 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS,isolation = Isolation.DEFAULT)
     public Msg deleteCustomerById(String customerIds) {
         if(customerIds.contains("-")){
             //将ids字符串转化为id，进行删除
@@ -82,11 +86,11 @@ public class CustomerServiceImp implements CustomerService {
 
 
                 short id = Short.parseShort(strId);
-
-
 //                进行删除
                 int result = 0;
                 try {
+                    mapper.deleteCustomerByPreOne(id);
+                    mapper.deleteCustomerByPreTwo(id);
                     result = mapper.deleteByPrimaryKey(id);
                 } catch (Exception e) {
                     numFail.add(id);
@@ -105,10 +109,11 @@ public class CustomerServiceImp implements CustomerService {
             }
 
         }else {
-
             short customerId = Short.parseShort(customerIds);
             int result = 0;
             try {
+                mapper.deleteCustomerByPreOne(customerId);
+                mapper.deleteCustomerByPreTwo(customerId);
                 result = mapper.deleteByPrimaryKey(customerId);
             } catch (Exception e) {
 
