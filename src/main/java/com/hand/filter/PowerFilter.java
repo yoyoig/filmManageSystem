@@ -22,6 +22,8 @@ public class PowerFilter implements Filter {
         System.out.println(request==null);
         String url = request.getRequestURI();
 
+
+
         //对静态资源进行放行
         Customer customer = (Customer) request.getSession().getAttribute("customerLogin");
         if(     url.contains("/index.jsp") || url.contains("/customerLogin") ||
