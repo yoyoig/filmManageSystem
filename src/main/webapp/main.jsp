@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="<c:url value="css/main.css" />">
     <link rel="stylesheet" href="<c:url value="css/addCustomer.css"/>">
     <link rel="stylesheet" href="<c:url value="css/addFilm.css"/>">
-
     <link rel="stylesheet" href="<c:url value="css/film.css"/>">
     <script type="text/javascript" src="<c:url value="js/mainCustomer.js"/>" ></script>
     <script type="text/javascript" src="<c:url value="js/film.js"/>" ></script>

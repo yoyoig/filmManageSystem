@@ -19,3 +19,7 @@
     border-bottom: solid 1px gainsboro;
     margin-bottom: 8px;
 }
+
+#table_customer_list{
+    font-size: 12px;
+}

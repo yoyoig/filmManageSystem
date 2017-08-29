@@ -101,6 +101,9 @@ public class CustomerController {
      * 传入页码，返回当前页面的信息
      * @param pageName
      * @return
+     *
+     * 该方法已放弃，使用了多条件查询的分页方法代替
+     *
      */
 //    @RequestMapping(value = "/customer",method = RequestMethod.GET)
 //    @ResponseBody

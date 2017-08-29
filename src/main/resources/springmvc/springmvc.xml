@@ -37,16 +37,16 @@
 
 
     <!--配置全局拦截器 -->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/customer"/>
-            <mvc:mapping path="/customer/*"/>
-            <mvc:mapping path="/main.jsp"/>
-            <mvc:mapping path="/film"/>
-            <mvc:mapping path="/film/*"/>
-            <bean class="com.hand.interceptor.PowerInterceptor"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/customer"/>-->
+            <!--<mvc:mapping path="/customer/*"/>-->
+            <!--<mvc:mapping path="/main.jsp"/>-->
+            <!--<mvc:mapping path="/film"/>-->
+            <!--<mvc:mapping path="/film/*"/>-->
+            <!--<bean class="com.hand.interceptor.PowerInterceptor"></bean>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 
 
 

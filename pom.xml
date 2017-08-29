@@ -168,6 +168,19 @@
         <artifactId>mybatis-generator-maven-plugin</artifactId>
         <version>1.3.2</version>
       </plugin>
+      <!--jetty服务器 -->
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>9.4.4.v20170414</version>
+        <configuration>
+          <scanIntervalSeconds>5</scanIntervalSeconds>
+          <webApp>
+            <contextPath>/</contextPath>
+          </webApp>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 

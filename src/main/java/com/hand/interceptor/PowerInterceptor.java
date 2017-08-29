@@ -26,11 +26,7 @@ class PowerInterceptor implements HandlerInterceptor {
                 out.close();
                 return false;
             }else{
-                String url = httpServletRequest.getRequestURI();
-                System.out.println("***********************"+url);
-                System.out.println("————————————————————用户为空");
                 httpServletRequest.setAttribute("msg","请登录！");
-                httpServletResponse.sendRedirect("/index.jsp");
                 httpServletRequest.getRequestDispatcher("/index.jsp").forward(httpServletRequest,httpServletResponse);
                 return false;
             }
@@ -39,7 +35,7 @@ class PowerInterceptor implements HandlerInterceptor {
 
 
         }else {
-            System.out.println("————————————————————用户存在");
+
             return true;
         }
     }
