@@ -24,9 +24,9 @@
 
 #### 查询用户信息
 * 多条件查询
-<p>查询用户信息使用了多条件查询的方式,
-![]()
-<p>
+<p>查询用户信息使用了多条件查询的方式<p>
+![多条件](https://github.com/yoyoig/filmManageSystem/blob/master/img/%E5%A4%9A%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2%E6%A1%86.png)
+
 
 * 分页显示
 
