@@ -14,7 +14,7 @@
 
 
 </head>
-<body background="img/background.jpg">
+<body background="img/background3.jpg">
     <div class="container">
         <div class="col-md-12">
             <h2>15254&nbsp;严铭轲</h2>

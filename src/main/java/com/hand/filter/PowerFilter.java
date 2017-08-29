@@ -19,7 +19,7 @@ public class PowerFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest)req;
         HttpServletResponse response = (HttpServletResponse)resp;
-        System.out.println(request==null);
+
         String url = request.getRequestURI();
 
 
@@ -36,7 +36,7 @@ public class PowerFilter implements Filter {
         }
 
         if(customer==null){
-            System.out.println(url+"-----------");
+
             request.setAttribute("msg","请登录！");
             request.getRequestDispatcher("/index.jsp").forward(request,response);
         }else{
