@@ -1,14 +1,21 @@
 # 电影租凭系统
-
+ 
 * 数据库配置
 <p>在src/main/resources/jdbc.properties中进行配置。</p>
 
 * 运行方式
-<p>在项目根目录下 打开命令窗口，分别运行：mvn clean;mvn compile;mvn jetty:run 命令。
-当命令行出现 [INFO] Started Jetty Server 时。
+
+<p>在项目根目录下 打开命令窗口，分别运行以下命令</p>
+ 
+ 1. 'mvn clean'
+  
+ 2. 'mvn compile'
+ 
+ 3. 'mvn jetty:run'   
+   
+<p>当命令行出现 [INFO] Started Jetty Server 时。
 在浏览器打开http://localhost:8080/ 即可进入登录页面.
 </p>
-
 
 ### 用户登录
 * 用户名前端校验

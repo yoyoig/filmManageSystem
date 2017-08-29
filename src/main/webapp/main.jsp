@@ -236,7 +236,7 @@
     <%--主页面头部显示--%>
     <div id="main_head" class="col-md-12">
         <div class="col-md-4">
-            <h4>电影租凭系统</h4>
+            <h4>15254&nbsp;严铭轲</h4>
         </div>
         <div class="col-md-2 col-lg-offset-6">
             <h4>
